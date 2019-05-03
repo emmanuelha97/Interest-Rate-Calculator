@@ -1,0 +1,105 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package CD.folder;
+
+/**
+ *
+ * @author emmanuelhernandez
+ */
+public class CD {
+
+    // instance variable
+    private double principal;
+    private double interest;
+    private int maturity;
+    private String compoundMode;
+
+    /**
+     * Constructs a CD object
+     *
+     * @param principal the beginning amount
+     * @param interest the interest applied the principal
+     * @param maturity how long it will mature
+     * @param compoundMode how much it is compounded
+     */
+    public CD(double principal, double interest, int maturity, String compoundMode) 
+    {
+        this.principal = principal;
+        this.interest = interest;
+        this.maturity = maturity;
+        this.compoundMode = compoundMode;
+
+    }
+
+    /**
+     * Gets the current Principal
+     *
+     * @return the principal
+     */
+    public double getPrin() 
+    {
+        return principal;
+    }
+
+    /**
+     * Gets the Interest
+     *
+     * @return the interest
+     */
+    public double getIn() 
+    {
+        return interest;
+    }
+
+    /**
+     * Gets the Maturity
+     *
+     * @return the maturity
+     */
+    public int getMat() 
+    {
+        return maturity;
+    }
+
+    /**
+     * Gets the Compound
+     *
+     * @return the compound
+     */
+    public String getCM() 
+    {
+        return compoundMode;
+    }
+
+    /**
+     * Gets the Current/Accumulated balance
+     *
+     * @return the current/accumulated balance
+     */
+    public double getAccuValue(double years) 
+    {
+        // Variable to determine how much compound is needed
+        double nComp;
+        if (compoundMode.equals("daily")) 
+        {
+            nComp = 365;
+        } 
+        else if (compoundMode.equals("monthly")) 
+        {
+            nComp = 12;
+        } 
+        else 
+        {
+            nComp = 4;
+        }
+
+        double rate = interest / 100; // Makes interest rate into a decimal
+
+        double accuInter = principal * Math.pow((1 + rate / nComp), nComp * years);
+        return accuInter;
+    }
+
+}
