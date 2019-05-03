@@ -1,0 +1,50 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package CD.folder;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Scanner;
+import javax.swing.JOptionPane;
+
+/**
+ *
+ * @author emmanuelhernandez
+ */
+public class DriverTest {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) throws IOException 
+    {
+      // create CD list object
+       CDList list = new CDList();
+       
+      // create Scanner object associated with the input file
+      Scanner infile = new Scanner(new File("CD-Data.txt"));
+
+       while (infile.hasNext()) // while more input lines...
+        {
+            // create Scanner object asociated with line
+            String line = infile.nextLine();
+            Scanner lineScan = new Scanner(line);
+
+              int principal = lineScan.nextInt();
+              int maturity = lineScan.nextInt();
+              double interest = lineScan.nextDouble();
+              String compound = lineScan.next();
+   
+              CD obj1 = new CD(principal, interest, maturity, compound);
+              // passes variables to object
+              list.addCD(obj1);
+       }
+       // calls void method annualReport on object list
+          list.annualReport();
+    }
+
+    }
+
