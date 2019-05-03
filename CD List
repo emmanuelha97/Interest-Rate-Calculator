@@ -1,0 +1,81 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package CD.folder;
+
+import java.util.ArrayList;
+
+/**
+ *
+ * @author emmanuelhernandez
+ */
+public class CDList {
+
+    // Instance var
+    private ArrayList<CD> certDeposits;
+//
+    /**
+     * Creates an empty data set
+     */
+    public CDList() 
+    {
+        certDeposits = new ArrayList<CD>();
+    }
+
+    /**
+     * Adds a new CD object
+     *
+     * @param certDeposit CD object
+     */
+    public void addCD(CD certDeposit) 
+    {
+        certDeposits.add(certDeposit);
+    }
+
+    /**
+     * Prints all data for object being called on
+     */
+    public void annualReport() 
+    {
+        // for 10 years starting from year 1...
+        for (int i = 1; i <= 10; i++) 
+        {
+            // prints out the heading for a CD object
+            System.out.println("\nCD Report for Year " + i);
+            System.out.printf("%9s %4s %6s %12s %13s %15s %14s%n",
+                    "Principal", "Term", "Rate", "Compounding", 
+                    "CurrentValue", "AnnualInterest", "TotalInterest");
+            System.out.printf("%9s %4s %6s %12s %13s %15s %14s%n",
+                    "=========", "====", "====", "===========",
+                    "============", "==============", "=============");
+           // for the  CD Array list create an object and print out the results
+            for (int o = 0; o < certDeposits.size(); o++) 
+            {
+
+                CD cert = certDeposits.get(o);
+                double princE = cert.getPrin();
+                int maturE = cert.getMat();
+                double ratE = cert.getIn();
+                String compounD = cert.getCM();
+                double accuVal = cert.getAccuValue(i);
+                double annual = cert.getAccuValue(i) - cert.getAccuValue(i - 1);
+                double totalI = cert.getAccuValue(i) - cert.getPrin();
+      
+               // determines when the Term has reached maturity and removes it 
+              if (!(i > maturE)) // years not greater than maturity
+              {
+                System.out.printf("$%-8.1f %4d %6.2f %12s "
+                        + " $%-13.2f$%-15.2f$%-8.2f%n", princE, maturE, ratE,
+                        compounD, accuVal, annual, totalI);
+              }
+              else
+              {      
+              }
+            }
+
+        }
+
+    }
+}
